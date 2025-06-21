@@ -1,0 +1,101 @@
+.scrolling-wrap {
+	overflow: hidden;
+	white-space: nowrap;
+	display: flex;
+	gap: 20px;
+    background-color: #141415;
+    padding: 30px 0;
+
+	&.bg-2 {
+		background-color: $theme-color-2;
+	}
+
+	&.bg-3 {
+		background-color: #F1EAFF;
+
+		.comm {
+			.cmn-textslide {
+				font-size: 22px;
+				font-weight: 500;
+				line-height: 32px;
+				text-transform: capitalize;
+				color: $header-color;
+			}
+		}
+	}
+
+	&.style-2 {
+		background-color: transparent;
+		padding: 0;
+		justify-content: space-between;
+		gap: 70px;
+		
+		.comm {
+			gap: 70px;
+		}
+	}
+
+	.comm {
+		display: flex;
+		align-items: center;
+		animation: scroll 60s linear infinite;
+		gap: 30px;
+		cursor: pointer;
+
+		.cmn-textslide {
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 32px;
+			text-transform: uppercase;
+            color: $white;
+            font-family: $heading-font;
+		}
+		// .text-custom-storke {
+		// 	-webkit-text-stroke: 1px rgb(255, 247, 247);
+		// 	-webkit-text-fill-color: transparent;
+		// }
+	}
+
+	&:hover {
+		.comm {
+			animation-play-state: paused;
+		}
+	}
+
+	@include breakpoint (max-xxl) {
+		.comm {
+			gap: 20px;
+		}
+	}
+
+	@include breakpoint (max-lg) {
+		gap: 14px;
+		.comm {
+			gap: 14px;
+		}
+	}
+
+	@include breakpoint (max-sm) {
+		.comm {
+			gap: 12px;
+		}
+	}
+}
+
+
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+@keyframes scroll2 {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-200%);
+	}
+}
