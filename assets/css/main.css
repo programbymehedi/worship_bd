@@ -7108,6 +7108,10 @@ input.main-search-input::placeholder {
   align-items: center;
   justify-content: center;
 }
+/* Very important for having a smooth transitions. */
+.swiper-free-mode > .swiper-wrapper {
+    transition-timing-function: linear;
+}
 
 /* image border for case studies  */
 .border-1, .thumb img{

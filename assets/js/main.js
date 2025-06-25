@@ -93,16 +93,19 @@ CSS TABLE OF CONTENTS
         if($('.brand-slider').length > 0) {
             const brandSlider = new Swiper(".brand-slider", {
                 spaceBetween: 30,
-                speed: 2000,
+                speed: 2500,
+                direction: 'horizontal',
                 loop: true,
+                slidesPerView: 1,
+                freeMode: true,
                 autoplay: {
-                    delay: 1000,
+                    delay: 0,
                     disableOnInteraction: false,
                 },
 
                 breakpoints: {
                     1199: {
-                        slidesPerView: 6,
+                        slidesPerView: 7,
                     },
                     991: {
                         slidesPerView: 5,
