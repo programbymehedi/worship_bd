@@ -146,3 +146,13 @@ a.meanmenu-reveal {
 .mean-remove {
     display: none !important
 }
+
+/*  ------------ contact us page show hide css -------- */
+.main-menu nav ul li:nth-child(7) {
+        display: none !important;
+    }
+@media (max-width: 575px) {
+    .main-menu nav ul li:nth-child(7) {
+        display: visible !important;
+    }
+}
