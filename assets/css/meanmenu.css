@@ -156,3 +156,27 @@ a.meanmenu-reveal {
         display: visible !important;
     }
 }
+/* menu active hover effect  */
+/* Border effect */
+.main-menu nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center;
+      width: 100%;
+      height: 2px;
+      background: #40c0c4;
+      transition: transform 0.3s ease;
+    }
+
+    /* On hover */
+    .main-menu nav ul li a:hover::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    /* On active (you can apply this dynamically using JS or server-side logic) */
+    .main-menu nav ul li a.active::after {
+      transform: translateX(-50%) scaleX(1);
+    }
