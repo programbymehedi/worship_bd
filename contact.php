@@ -1,46 +1,45 @@
 <?php
-    /*
-    name
-    email
-    message
-    */
-    // Only process POST reqeusts.
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the form fields and remove whitespace.
-        $name = strip_tags(trim($_POST["name"]));
-        $name = str_replace(array("\r","\n"),array(" "," "),$name);
-        $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-        $message = trim($_POST["message"]);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-        
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
 
-        // Set the recipient email address.
-        // FIXME: Update this to your desired email address.
-        $recipient = "mehedihasanmithun01@gmail.com";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name     = htmlspecialchars(trim($_POST["name"]));
+    $email    = htmlspecialchars(trim($_POST["email"]));
+    $service  = htmlspecialchars(trim($_POST["services"]));
+    $message  = htmlspecialchars(trim($_POST["message"]));
 
-        // Build the email content.
-        $email_content = "Name $name\n";
-        $email_content .= "Email \n$message\n";
-        $email_content .= "Message \n$message\n";
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'yourgmail@gmail.com'; // your Gmail
+        $mail->Password   = 'yourapppassword';     // Gmail App Password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 587;
 
-        // Build the email headers.
-        $email_headers = "From: $name <$email>";
+        // Sender and recipient
+        $mail->setFrom('yourgmail@gmail.com', 'Website Contact');
+        $mail->addAddress('yourgmail@gmail.com'); // Receive to same Gmail
 
-        // Send the email.
-        if (mail($recipient,  $email_content, $email_headers)) {
-            // Set a 200 (okay) response code.
-            http_response_code(200);
-            echo "Thank You! Your message has been sent.";
-        } else {
-            // Set a 500 (internal server error) response code.
-            http_response_code(500);
-            echo "Oops! Something went wrong ande we couldn't send your message.";
-        }
+        // Content
+        $mail->isHTML(false);
+        $mail->Subject = "New Contact Form Submission - $service";
+        $mail->Body    =
+            "Name: $name\n" .
+            "Email: $email\n" .
+            "Service: $service\n\n" .
+            "Message:\n$message";
 
-    } else {
-        // Not a POST request, set a 403 (forbidden) response code.
-        http_response_code(403);
-        echo "There was a problem with your submission, please try again.";
+        $mail->send();
+        echo "success";
+    } catch (Exception $e) {
+        echo "Mailer Error: {$mail->ErrorInfo}";
     }
-
+}
 ?>
